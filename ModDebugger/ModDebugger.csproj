@@ -50,6 +50,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomCSharpCodeProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ModDebuggerPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
