@@ -14,10 +14,16 @@ namespace ModDebugger
     public sealed class ModDebuggerPlugin : IPlugin
     {
         private readonly CustomCSharpCodeProvider _customCSharpCodeProvider;
-        private readonly List<TempFileCollection> _oldTempFileCollections; 
+        private readonly List<TempFileCollection> _oldTempFileCollections;
+        private readonly string _basePath;
 
         public ModDebuggerPlugin()
         {
+            var assemblyLocation = Assembly.GetExecutingAssembly().Location;
+            var assemblyFolder = Path.GetDirectoryName(assemblyLocation);
+            _basePath = Path.Combine(assemblyFolder, "TempFiles");
+            Directory.CreateDirectory(_basePath);
+
             _customCSharpCodeProvider = new CustomCSharpCodeProvider();
             _customCSharpCodeProvider.CompilerCreating += OnCompilerCreating;
 
@@ -65,8 +71,9 @@ namespace ModDebugger
 
         private void ReplaceTempFileCollection()
         {
-            var oldTempDir = IlCompiler.Options.TempFiles.TempDir;
-            var tempFiles = new TempFileCollection(oldTempDir, true);
+
+
+            var tempFiles = new TempFileCollection(_basePath, true);
             IlCompiler.Options.TempFiles = tempFiles;
 
             _oldTempFileCollections.Add(tempFiles);
