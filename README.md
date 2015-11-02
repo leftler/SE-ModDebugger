@@ -7,7 +7,7 @@ so now it is possible to step through them with a debugger.
 
 ## HOW TO USE
 
-Tutorial Video: https://youtu.be/qO3kIz7uqFY
+Tutorial Video: https://youtu.be/qO3kIz7uqFY  
 Forum Link: http://forum.keenswh.com/threads/plugin-mod-debugger.7372015/
 
 To prevent problems when using this plugin, before unziping the release be 
