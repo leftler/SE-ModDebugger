@@ -27,7 +27,7 @@ namespace ModDebugger
             _customCSharpCodeProvider = new CustomCSharpCodeProvider();
             _customCSharpCodeProvider.CompilerCreating += OnCompilerCreating;
 
-            _oldTempFileCollections = new CacheList<TempFileCollection>();
+            _oldTempFileCollections = new List<TempFileCollection>();
         }
 
         public void Dispose()
@@ -86,15 +86,6 @@ namespace ModDebugger
             if (field != null)
             {
                 field.SetValue(null, _customCSharpCodeProvider);
-                return true;
-            }
-
-            //Future proofing, check to see if it could be in a property.
-            var properties = typeof(IlCompiler).GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-            var property = properties.FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof (CustomCSharpCodeProvider)));
-            if (property != null)
-            {
-                property.SetValue(null, _customCSharpCodeProvider, null);
                 return true;
             }
 
